@@ -32,7 +32,6 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.172.0",
     "three-globe": "^2.40.1",
-    "vite-plugin-checker": "^0.8.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {

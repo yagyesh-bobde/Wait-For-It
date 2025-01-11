@@ -283,9 +283,9 @@ export default function App() {
             <div className="fixed bottom-12 left-1/2 -translate-x-1/2 lg:-translate-x-0 lg:left-1/4 text-xl font-bold">
               <div className="text-xs mb-4 text-center">Backed by</div>
               <span className="bg-orange-500 text-white p-2 rounded-md mx-2">
-                Y
+                Fun
               </span>
-              <span>agyesh</span>
+              <span>Hub</span>
             </div>
           </motion.div>
         )}

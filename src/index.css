@@ -61,6 +61,16 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-hidden h-screen w-screen;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply backdrop-blur-lg bg-transparent;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500;
   }
 }

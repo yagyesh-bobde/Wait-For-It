@@ -1,6 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* CSS Reset and Scrollbar Styling */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+}
+
+/* Root Variables with Fallbacks */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -27,8 +60,13 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+    --radius: 0.5rem;
+
+    /* Add fallback values */
+    background-color: hsl(0 0% 100%);
+    color: hsl(0 0% 3.9%);
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -53,24 +91,104 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
+
+    /* Add fallback values for dark mode */
+    background-color: hsl(0 0% 3.9%);
+    color: hsl(0 0% 98%);
   }
 }
+
+/* Base Styles with Cross-Browser Support */
 @layer base {
   * {
     @apply border-border;
   }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     @apply bg-background text-foreground overflow-hidden h-screen w-screen;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Improve touch handling on mobile */
+  @media (hover: none) {
+    * {
+      cursor: default !important;
+    }
   }
 }
 
+/* Utility Classes with Prefixes */
 @layer utilities {
   .glass-effect {
     @apply backdrop-blur-lg bg-transparent;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
   }
   
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Add smooth scrolling when needed */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better touch handling */
+  .touch-action-none {
+    touch-action: none;
+    -ms-touch-action: none;
+  }
+
+  /* GPU acceleration */
+  .gpu-accelerated {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000;
+    -webkit-perspective: 1000;
+  }
+}
+
+/* Animation Support */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Fix for iOS momentum scrolling */
+@supports (-webkit-touch-callout: none) {
+  .h-screen {
+    height: -webkit-fill-available;
   }
 }

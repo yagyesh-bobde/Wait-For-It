@@ -7,8 +7,7 @@ export function SplashScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 2500); // Total duration including animations
-
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -59,14 +58,8 @@ export function SplashScreen() {
               <div className="w-full h-full rounded-full border-2 border-indigo-500/30" />
             </motion.div>
 
-            {/* Text reveal */}
+            {/* Text container with Safari-compatible gradient */}
             <div className="relative">
-              <motion.div
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 mix-blend-overlay"
-              />
               <div className="flex space-x-1 overflow-hidden">
                 {letters.map((letter, index) => (
                   <motion.span
@@ -78,7 +71,15 @@ export function SplashScreen() {
                       delay: index * 0.05,
                       ease: [0.33, 1, 0.68, 1],
                     }}
-                    className="text-4xl md:text-6xl font-bold text-indigo-600 dark:text-indigo-400"
+                    className="text-4xl md:text-6xl font-bold relative"
+                    style={{
+                      background:
+                        "linear-gradient(to right, #2563eb, #4f46e5, #7c3aed)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      color: "transparent",
+                    }}
                   >
                     {letter === " " ? "\u00A0" : letter}
                   </motion.span>
